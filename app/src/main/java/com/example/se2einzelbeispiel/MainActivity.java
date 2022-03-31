@@ -25,15 +25,17 @@ public class MainActivity extends AppCompatActivity {
 
         MyThread myThread = new MyThread();
         myThread = new MyThread();
-        new Thread(myThread).start();
 
         Button sendButton = findViewById(R.id.sendButton);
         String matrikelnummer = matrikelnummerInput.toString();
 
         MyThread finalMyThread = myThread;
+        MyThread finalMyThread1 = myThread;
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                new Thread(finalMyThread1).start();
+
                 String matrikelnummer = matrikelnummerInput.toString();
                 finalMyThread.sendMsgParam(matrikelnummer);
                 String antwort = finalMyThread.getAntwort();
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public synchronized void resultDisplayMessage(String message) {
+    public void resultDisplayMessage(String message) {
         final TextView serverResponseTextView = findViewById(R.id.matrikelnummerInput);
         serverResponseTextView.setText(message);
     }
